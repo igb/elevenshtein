@@ -70,6 +70,23 @@
 
 
 
+(ert-deftest test-get-cell()
+  "Validate that get cell operations work on a valid matrix"
+  (should
+   (equal
+    1
+    (get-cell 0 1 2 2 [0 1 0 0])
+    )
+   )
+
+   (should
+   (equal
+    45
+    (get-cell 2 2 3 3 [0 0 0 0 0 0 0 0 45])
+    )
+   )
+)
+
 (ert-deftest test-matrix-creation()
   "Validate that the correct vector representation of a matrix is created."
   (should
