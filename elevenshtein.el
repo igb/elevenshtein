@@ -1,29 +1,61 @@
 (defun edit-distance (Source Target)
-   
- 
+  (let (
+	(matrix (init-matrix Source Target))
+	)
 
-  0)
+    (dotimes (_i (- (length Source) 1))
+      (dotimes (_j (- (length Target) 1))
+	(let ( (i (+ _i 1))
+	       (j (+ _j 1))
+	       )
+
+	  (let* (
+		(cost
+		 (if (= (aref Source  (- i 1)) (aref Target  (- j 1) ))
+		     0
+		   1)
+		 )
+		(deletion
+		 (+ (get-cell (- i 1) j (+ (length Source) 1) (+ (length Target) 1) matrix) 1))
+		(insertion
+		 (+ (get-cell i (- j 1) (+ (length Source) 1) (+ (length Target) 1) matrix) 1))
+	       	(substitution
+		 (+ (get-cell (- i 1) (- j 1) (+ (length Source) 1) (+ (length Target) 1) matrix) cost))
+		(distance (min deletion insertion substitution))
+		)
+
+	    (set-cell i j distance (+ (length Source) 1) (+ (length Target) 1) matrix)
+	    
+	    )
+	  
+
+	  )
+	)
+      )
+    (message matrix)
+ (get-cell (length Source) (length Target) (+ (length Source) 1) (+ (length Target) 1) matrix ) ))
 
 (defun init-matrix (Source Target)
  
  
 
   (let* ( ;; using let* to ensure the sequential binding of variables
-	(rows (+ (length Source) 1))
-	(cols (+ (length Target) 1))
-	(matrix (make-vector (* rows cols) 0)))
+	 (rows (+ (length Source) 1))
+	 (cols (+ (length Target) 1))
+	 (matrix (make-vector (* rows cols) 0)))
+    
+    ;; set the top row costs to 0, 1, 2 ...source length
+    (dotimes (i cols)
+      (set-cell 0 i i rows cols matrix))
+    
+    ;; set the first col costs to 0, 1, 2 ...target length
+    (dotimes (j rows)
+      (set-cell j 0 j rows cols matrix))
+    
+    matrix))
 
-  ; set the top row costs to 0, 1, 2 ...source length
-  (dotimes (i cols)
-	  (set-cell 0 i i rows cols matrix))
 
-   ; set the first col costs to 0, 1, 2 ...target length
-  (dotimes (j rows)
-	   (set-cell j 0 j rows cols matrix))
-  matrix))
-  
-
-;this has a side effect, should refactor away
+;;this has a side effect, should refactor away
 (defun set-cell (row column value rows cols matrix)
   (aset matrix (+ (* row cols) column) value)
   matrix)
