@@ -3,8 +3,8 @@
 	(matrix (init-matrix Source Target))
 	)
 
-    (dotimes (_i (- (length Source) 1))
-      (dotimes (_j (- (length Target) 1))
+    (dotimes (_i (length Source))
+      (dotimes (_j (length Target))
 	(let ( (i (+ _i 1))
 	       (j (+ _j 1))
 	       )
@@ -32,7 +32,6 @@
 	  )
 	)
       )
-    (message matrix)
  (get-cell (length Source) (length Target) (+ (length Source) 1) (+ (length Target) 1) matrix ) ))
 
 (defun init-matrix (Source Target)
