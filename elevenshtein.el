@@ -1,10 +1,31 @@
+(defun edit-distance-buf ()
+  (interactive)
+  (let* (
+	 (SourceBuffer (read-buffer "Select first buffer to compare: "))
+	 (SourceStr (get-buffer-as-string SourceBuffer))
+	 (TargetBuffer (read-buffer "Select second buffer to compare: "))
+	 (TargetStr (get-buffer-as-string TargetBuffer))
+	 )
+    (message "calculating edit distance...")
+    (message "Edit distance is %s" (edit-distance SourceStr TargetStr))
+    )
+)
+
+(defun get-buffer-as-string (Buffer)
+  (with-current-buffer Buffer
+  (buffer-substring-no-properties (point-min) (point-max))))
+
+
+
 (defun edit-distance (Source Target)
   (let (
 	(matrix (init-matrix Source Target))
+	(SourceLength (length Source))
+	(TargetLength (length Target))
 	)
 
-    (dotimes (_i (length Source))
-      (dotimes (_j (length Target))
+    (dotimes (_i SourceLength)
+      (dotimes (_j TargetLength)
 	(let ( (i (+ _i 1))
 	       (j (+ _j 1))
 	       )
@@ -16,15 +37,15 @@
 		   1)
 		 )
 		(deletion
-		 (+ (get-cell (- i 1) j (+ (length Source) 1) (+ (length Target) 1) matrix) 1))
+		 (+ (get-cell (- i 1) j (+ SourceLength 1) (+ TargetLength 1) matrix) 1))
 		(insertion
-		 (+ (get-cell i (- j 1) (+ (length Source) 1) (+ (length Target) 1) matrix) 1))
+		 (+ (get-cell i (- j 1) (+ SourceLength 1) (+ TargetLength 1) matrix) 1))
 	       	(substitution
-		 (+ (get-cell (- i 1) (- j 1) (+ (length Source) 1) (+ (length Target) 1) matrix) cost))
+		 (+ (get-cell (- i 1) (- j 1) (+ SourceLength 1) (+ TargetLength 1) matrix) cost))
 		(distance (min deletion insertion substitution))
 		)
 
-	    (set-cell i j distance (+ (length Source) 1) (+ (length Target) 1) matrix)
+	    (set-cell i j distance (+ SourceLength 1) (+ TargetLength 1) matrix)
 	    
 	    )
 	  
@@ -32,12 +53,10 @@
 	  )
 	)
       )
- (get-cell (length Source) (length Target) (+ (length Source) 1) (+ (length Target) 1) matrix ) ))
+ (get-cell SourceLength TargetLength (+ SourceLength 1) (+ TargetLength 1) matrix ) ))
 
-(defun init-matrix (Source Target)
- 
- 
-
+;; create the 2D array that stores the edit distance calculations.
+(defun init-matrix (Source Target) 
   (let* ( ;; using let* to ensure the sequential binding of variables
 	 (rows (+ (length Source) 1))
 	 (cols (+ (length Target) 1))
