@@ -4,7 +4,7 @@ Elevenshtein is an Elisp extension for the [Emacs](https://www.gnu.org/software/
 
 ## Installation Instructions
 
-1. Download and save the file [emacstodon.el](https://raw.githubusercontent.com/igb/elevenshtein/master/elevenshtein.el) to a local directory on the computer where you run Emacs.
+1. Download and save the file [elevenshtein.el](https://raw.githubusercontent.com/igb/elevenshtein/master/elevenshtein.el) to a local directory on the computer where you run Emacs.
 
 2. Locate your *.emacs* file in your home directory and add the following line:
 ```Elisp
