@@ -24,7 +24,7 @@ Ok, now you are good to go. Just launch or restart Emacs!
 **TL;DR:** *M-x edit-distance-buf*
 
 ### Details ###
-While using Emacs, if you want to calculate the edit distance of two buffers, execute the command *M-x edit-distance-buf*. You will then be prompted to enter the first buffer. You can hit *tab* to see a list of available buffers. After entering the first bufffer you will be prompted to enter the second buffer (once again you can use *tab* to see available buffers). Upon entering the second buffer the edit distance between the buffers will be calculated and dispayed in the mini buffer.
+While using Emacs, if you want to calculate the edit distance of two buffers, execute the command *M-x edit-distance-buf*. You will then be prompted to enter the first buffer. You can hit *tab* to see a list of available buffers. After entering the first bufffer you will be prompted to enter the second buffer (once again you can use *tab* to see available buffers). Upon entering the second buffer, the edit distance between the buffers will be calculated and dispayed in the mini buffer.
 
 
 #### Example ####
