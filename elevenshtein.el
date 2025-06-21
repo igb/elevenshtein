@@ -9,7 +9,7 @@
     (message "calculating edit distance...")
     (message "Edit distance is %s" (edit-distance SourceStr TargetStr))
     )
-)
+  )
 
 (defun get-buffer-as-string (Buffer)
   (with-current-buffer Buffer
