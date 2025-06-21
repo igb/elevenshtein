@@ -1,6 +1,6 @@
 # Elevenshtein
 
-Elevenshtein is an Elisp extension for the [Emacs](https://www.gnu.org/software/emacs/) text editor that enables a user to calculate the edit distance between two buffers.
+Elevenshtein is an Elisp extension for the [Emacs](https://www.gnu.org/software/emacs/) text editor that enables a user to calculate the edit (or [Levenshtein](https://en.wikipedia.org/wiki/Levenshtein_distance)) distance between two buffers.
 
 ## Installation Instructions
 
