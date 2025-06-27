@@ -30,4 +30,6 @@ fn init(_: &Env) -> emacs::Result<()> {
 fn test_matrix_creation() {
     //Validate that the correct vector representation of a matrix is created.
     assert_eq!(vec![vec![0, 0], vec![0, 0]], create_matrix(2, 2));
+    assert_eq!(vec![vec![0]], create_matrix(1, 1));
+    assert_eq!(Vec::<Vec::<i32>>::new(), create_matrix(0, 0));
 }
