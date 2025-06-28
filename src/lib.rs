@@ -1,4 +1,5 @@
 use emacs::{defun, Env, Result};
+use std::ptr;
 
 emacs::plugin_is_GPL_compatible!();
 
@@ -9,10 +10,22 @@ fn elevenshtein(_env: &Env) -> emacs::Result<String> {
 
 #[defun]
 fn edit_distance(_env: &Env, source: String, target: String) -> emacs::Result<i32> {
+    //calculate edit distance
+    return Ok(edit_distance_impl(&source, &target));
+}
+
+fn edit_distance_impl(source: &str, target: &str) -> i32 {
     let cols: usize = source.chars().count();
     let rows: usize = target.chars().count();
     let mut _matrix = create_matrix(cols, rows);
-    Ok(0)
+    for i in 0..cols {
+        for j in 0..rows {
+            let source_c = source.chars().nth(i).unwrap();
+            let target_c = source.chars().nth(i).unwrap();
+        }
+    }
+
+    return 0;
 }
 
 // generate a 2D vector to store DP progress and final score
@@ -53,5 +66,15 @@ fn test_matrix_creation() {
             vec![5, 0, 0, 0, 0, 0]
         ],
         create_matrix(5, 5)
+    );
+}
+
+#[test]
+fn test_edit_distance_same() {
+    // Validate that two identical strings have an edit distance of '0'.
+
+    assert_eq!(
+        0,
+        edit_distance_impl("This should be the same.", "This should be the same.")
     );
 }
