@@ -78,3 +78,36 @@ fn test_edit_distance_same() {
         edit_distance_impl("This should be the same.", "This should be the same.")
     );
 }
+
+#[test]
+fn test_edit_distance_basic() {
+    // Basic edit distance calculation.
+
+    assert_eq!(3, edit_distance_impl("kitten", "sitting"));
+}
+
+#[test]
+fn test_edit_distance_different_lengths() {
+    // Ensure that edit distance is calculated correctly when strings are of different lengths.
+
+    assert_eq!(
+        22,
+        edit_distance_impl(
+            "This is a short string.",
+            "This is a much, much, much, longer string."
+        )
+    );
+}
+
+#[test]
+fn test_edit_distance_different_lengths_different_order() {
+    // Ensure that edit distance is calculated correctly when strings are of different lengths and are compared in a different order.
+
+    assert_eq!(
+        22,
+        edit_distance_impl(
+            "This is a much, much, much, longer string.",
+            "This is a short string."
+        )
+    );
+}
