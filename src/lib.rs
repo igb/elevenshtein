@@ -36,7 +36,6 @@ fn edit_distance_impl(source: &str, target: &str) -> i32 {
                 .expect("WTF!");
         }
     }
-    println!("{:?}", matrix);
     return matrix[rows][cols];
 }
 
