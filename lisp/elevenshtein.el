@@ -1,4 +1,4 @@
-;;; elevenshtein.el --- Tiny demo math helpers  -*- lexical-binding: t; -*-
+;;; elevenshtein.el --- edit (or Levenshtein) distance implementation  -*- lexical-binding: t; -*-
 
 ;; Author: Ian Brown <igb@hccp.org>
 ;; URL:    https://github.com/igb/elevenshtein
