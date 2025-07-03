@@ -28,7 +28,7 @@ While using Emacs, if you want to calculate the edit distance of two buffers, ex
 
 
 #### Example ####
-![example chat](https://raw.githubusercontent.com/igb/elevenshtein/refs/heads/main/example.gif)
+![example chat](https://raw.githubusercontent.com/igb/elevenshtein/refs/heads/main/examples/example.gif)
 
 ## Questions? ##
 
