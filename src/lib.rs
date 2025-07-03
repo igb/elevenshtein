@@ -17,15 +17,27 @@ fn edit_distance(_env: &Env, source: String, target: String) -> emacs::Result<i3
 fn edit_distance_impl(source: &str, target: &str) -> i32 {
     let cols: usize = source.chars().count();
     let rows: usize = target.chars().count();
-    let mut _matrix = create_matrix(cols, rows);
-    for i in 0..cols {
-        for j in 0..rows {
-            let source_c = source.chars().nth(i).unwrap();
-            let target_c = source.chars().nth(i).unwrap();
+    let mut matrix = create_matrix(cols, rows);
+    for i in 1..(rows + 1) {
+        for j in 1..(cols + 1) {
+            let source_c = source.chars().nth(j - 1).unwrap();
+            let target_c = target.chars().nth(i - 1).unwrap();
+
+            let cost: i32 = if source_c == target_c { 0 } else { 1 };
+
+            let deletion = matrix[i - 1][j] + 1;
+            let insertion = matrix[i][j - 1] + 1;
+            let substitution = matrix[i - 1][j - 1] + cost;
+
+            matrix[i][j] = vec![deletion, insertion, substitution]
+                .iter()
+                .cloned()
+                .min()
+                .expect("WTF!");
         }
     }
-
-    return 0;
+    println!("{:?}", matrix);
+    return matrix[rows][cols];
 }
 
 // generate a 2D vector to store DP progress and final score
@@ -66,6 +78,16 @@ fn test_matrix_creation() {
             vec![5, 0, 0, 0, 0, 0]
         ],
         create_matrix(5, 5)
+    );
+    assert_eq!(
+        vec![
+            vec![0, 1, 2, 3],
+            vec![1, 0, 0, 0],
+            vec![2, 0, 0, 0],
+            vec![3, 0, 0, 0],
+            vec![4, 0, 0, 0]
+        ],
+        create_matrix("one".chars().count(), "four".chars().count())
     );
 }
 
