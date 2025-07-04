@@ -11,6 +11,16 @@
     (insert-file-contents (ert-resource-file file))
     (buffer-string)))
 
+;; utility to test edit distance calculations of size n
+(defun test-n-distance(n)
+  (let
+      ((x (file-to-string (concat "x-" (number-to-string n) ".txt")))	   
+       (y (file-to-string (concat "y-" (number-to-string n) ".txt"))))
+       (should
+	(equal
+	 (edit-distance x y)
+	 n)
+	)))
 
 
 
@@ -113,12 +123,19 @@
 
 (ert-deftest test-edit-distance-100()
   "Ensure that edit distance is calculated correctly with max delta for a 100-byte string."
-  (let
-      ((x (file-to-string "x-100.txt"))	   
-       (y (file-to-string "y-100.txt")))
-       (should
-	(equal
-	 (edit-distance x y)
-	 100)
-	)))
+  (test-n-distance 100) 
+  )
+
+
+
+(ert-deftest test-edit-distance-1000()
+  "Ensure that edit distance is calculated correctly with max delta for a 1000-byte string."
+  (test-n-distance 1000) 
+ )
+
+
+(ert-deftest test-edit-distance-10000()
+  "Ensure that edit distance is calculated correctly with max delta for a 1000-byte string."
+  (test-n-distance 10000) 
+ )
 
