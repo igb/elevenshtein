@@ -1,5 +1,6 @@
 ;; UNIT TESTS
 (require 'ert)
+(require 'ert-x)
 (require 'elevenshtein)
 
 (ert-deftest test-set-cell()
@@ -98,6 +99,26 @@
    (edit-distance "kitten" "sitting")
    3)
    ))
+
+(ert-deftest test-edit-distance-100()
+  "Ensure that edit distance is calculated correctly with max delta for a 100-byte string."
+
+  (let
+      (
+       (x (with-temp-buffer
+	    (insert-file-contents (ert-resource-file "x-100.txt"))
+	    (buffer-string)))
+       (y (with-temp-buffer
+	    (insert-file-contents (ert-resource-file "y-100.txt"))
+	    (buffer-string))))
+     
+       (should
+	(equal
+	 (edit-distance x y)
+	 100)
+	)))
+
+
 
 
 
