@@ -3,6 +3,17 @@
 (require 'ert-x)
 (require 'elevenshtein)
 
+
+
+;; utility function to read a resource file into a string
+(defun file-to-string (file)
+  (with-temp-buffer
+    (insert-file-contents (ert-resource-file file))
+    (buffer-string)))
+
+
+
+
 (ert-deftest test-set-cell()
   "Validate that set cell operations work on a valid matrix"
   (should
@@ -102,23 +113,12 @@
 
 (ert-deftest test-edit-distance-100()
   "Ensure that edit distance is calculated correctly with max delta for a 100-byte string."
-
   (let
-      (
-       (x (with-temp-buffer
-	    (insert-file-contents (ert-resource-file "x-100.txt"))
-	    (buffer-string)))
-       (y (with-temp-buffer
-	    (insert-file-contents (ert-resource-file "y-100.txt"))
-	    (buffer-string))))
-     
+      ((x (file-to-string "x-100.txt"))	   
+       (y (file-to-string "y-100.txt")))
        (should
 	(equal
 	 (edit-distance x y)
 	 100)
 	)))
-
-
-
-
 
