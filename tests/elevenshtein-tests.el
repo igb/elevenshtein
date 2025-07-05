@@ -23,6 +23,18 @@
 	)))
 
 
+;; utility to test edit distance calculations of size n
+(defun test-native-n-distance(n)
+  (let
+      ((x (file-to-string (concat "x-" (number-to-string n) ".txt")))	   
+       (y (file-to-string (concat "y-" (number-to-string n) ".txt"))))
+       (should
+	(equal
+	 (native-edit-distance x y)
+	 n)
+	)))
+
+
 
 (ert-deftest test-set-cell()
   "Validate that set cell operations work on a valid matrix"
@@ -137,5 +149,24 @@
 (ert-deftest test-edit-distance-10000()
   "Ensure that edit distance is calculated correctly with max delta for a 1000-byte string."
   (test-n-distance 10000) 
+ )
+
+
+(ert-deftest test-native-edit-distance-100()
+  "Ensure that edit distance is calculated correctly with max delta for a 100-byte string."
+  (test-native-n-distance 100) 
+  )
+
+
+
+(ert-deftest test-native-edit-distance-1000()
+  "Ensure that edit distance is calculated correctly with max delta for a 1000-byte string."
+  (test-native-n-distance 1000) 
+ )
+
+
+(ert-deftest test-native-edit-distance-10000()
+  "Ensure that edit distance is calculated correctly with max delta for a 1000-byte string."
+  (test-native-n-distance 10000) 
  )
 

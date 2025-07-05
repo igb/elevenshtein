@@ -1,12 +1,7 @@
-use emacs::{defun, Env, Result};
-use std::ptr;
+use emacs::{defun, Env};
+use std::fs;
 
 emacs::plugin_is_GPL_compatible!();
-
-#[defun]
-fn elevenshtein(_env: &Env) -> emacs::Result<String> {
-    Ok("Hello from Rust!".to_string())
-}
 
 #[defun]
 fn edit_distance(_env: &Env, source: String, target: String) -> emacs::Result<i32> {
@@ -58,6 +53,16 @@ fn init(_: &Env) -> emacs::Result<()> {
 }
 
 #[cfg(test)]
+fn test_n_distance(n: i32) {
+    assert_eq!(
+        n,
+        edit_distance_impl(
+            &fs::read_to_string(format!("../tests/resources/x-{}.txt", n)).unwrap(),
+            &fs::read_to_string(format!("../tests/resources/y-{}.txt", n)).unwrap()
+        )
+    )
+}
+
 #[test]
 fn test_matrix_creation() {
     //Validate that the correct vector representation of a matrix is created.
@@ -131,4 +136,22 @@ fn test_edit_distance_different_lengths_different_order() {
             "This is a short string."
         )
     );
+}
+
+#[test]
+fn test_edit_distance_100() {
+    //   Ensure that edit distance is calculated correctly with max delta for a 100-byte string.
+    test_n_distance(100);
+}
+
+#[test]
+fn test_edit_distance_1000() {
+    //   Ensure that edit distance is calculated correctly with max delta for a 100-byte string.
+    test_n_distance(1000);
+}
+
+#[test]
+fn test_edit_distance_10000() {
+    //   Ensure that edit distance is calculated correctly with max delta for a 100-byte string.
+    test_n_distance(10000);
 }

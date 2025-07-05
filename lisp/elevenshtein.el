@@ -11,6 +11,15 @@
 
 ;;; Code:
 
+
+
+(defconst elevenshtein--so
+  (expand-file-name
+   (concat "../native/target/release/libelevenshtein" module-file-suffix)
+   (file-name-directory (or load-file-name buffer-file-name))))
+
+(module-load elevenshtein--so)
+
 (defun edit-distance-buf ()
   (interactive)
   (let* (
@@ -29,8 +38,9 @@
   (buffer-substring-no-properties (point-min) (point-max))))
 
 
-
+;; pure elisp implementation of edit distance
 (defun edit-distance (Source Target)
+
   (let (
 	(matrix (init-matrix Source Target))
 	(SourceLength (length Source))
@@ -93,6 +103,13 @@
 
 (defun get-cell (row column rows cols matrix)
   (aref matrix (+ (* row cols) column)))
+
+;; shim over native (Rust) implementation of edit distance
+(defun native-edit-distance (Source Target)
+  (elevenshtein-edit-distance Source Target)
+ )
+
+
 
 
 (provide 'elevenshtein)
