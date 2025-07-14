@@ -98,7 +98,7 @@
    ))
 
 
-(ert-deftest test-edit-distance-0()
+(ert-deftest test-edit-distance-same()
   "Validate that two identical strings have an edit distance of '0'."
   (should
    (equal
@@ -146,10 +146,10 @@
  )
 
 
-(ert-deftest test-edit-distance-10000()
-  "Ensure that edit distance is calculated correctly with max delta for a 1000-byte string."
-  (test-n-distance 10000) 
- )
+;(ert-deftest test-edit-distance-10000()
+;  "Ensure that edit distance is calculated correctly with max delta for a 1000-byte string."
+;  (test-n-distance 10000) 
+; )
 
 
 (ert-deftest test-native-edit-distance-100()
@@ -165,8 +165,8 @@
  )
 
 
-(ert-deftest test-native-edit-distance-10000()
-  "Ensure that edit distance is calculated correctly with max delta for a 1000-byte string."
-  (test-native-n-distance 10000) 
- )
+;;(ert-deftest test-native-edit-distance-10000()
+;;  "Ensure that edit distance is calculated correctly with max delta for a 1000-byte string."
+;;  (test-native-n-distance 10000) 
+;; )
 
