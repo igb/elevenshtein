@@ -1,3 +1,4 @@
+mkdir -p tests
 export EMACS_TEST_JUNIT_REPORT=test-report.xml;
 emacs --batch -L lisp/ -L tests/ -l tests/elevenshtein-tests.el -f ert-run-tests-batch-and-exit
 cd native; cargo +nightly test  --release -- -Z unstable-options --report-time --format junit | xmllint --format - > elevenshtein-tests-cargo-release.xml
