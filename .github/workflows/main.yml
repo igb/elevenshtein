@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # If your scripts expect Rust + Emacs preinstalled, do it here.
+      # You can drop this if your scripts install everything themselves.
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install Emacs
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y emacs-nox
+
+      # ---- Run your scripts ----
+      - name: Run Rust build & tests
+        run: ./run-tests.sh
+
+      # ---- Upload JUnit reports (optional but useful) ----
+      - name: Upload JUnit reports
+        if: always()  # still upload even if tests fail
+        uses: actions/upload-artifact@v4
+        with:
+          name: junit-reports
+          path: |
+            tests/test-report.xml
