@@ -160,13 +160,15 @@
 
 
 (ert-deftest test-native-edit-distance-1000()
+  :tags '(:slow)
   "Ensure that edit distance is calculated correctly with max delta for a 1000-byte string."
   (test-native-n-distance 1000) 
  )
 
 
-;;(ert-deftest test-native-edit-distance-10000()
-;;  "Ensure that edit distance is calculated correctly with max delta for a 1000-byte string."
-;;  (test-native-n-distance 10000) 
-;; )
+(ert-deftest test-native-edit-distance-10000()
+  :tags '(:slow)
+  "Ensure that edit distance is calculated correctly with max delta for a 1000-byte string."
+  (test-native-n-distance 10000) 
+ )
 
