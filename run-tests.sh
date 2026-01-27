@@ -1,4 +1,4 @@
-mkdir -p tests
+mkdir -p tests/reports
 export EMACS_TEST_JUNIT_REPORT=test-report.xml;
 
 if [ "$CI" = "true" ] || [ "$RUN_SLOW_TESTS" = "true" ]; then
