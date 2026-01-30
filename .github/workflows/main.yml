@@ -30,7 +30,9 @@ jobs:
 
       # ---- Run your scripts ----
       - name: Run Rust build & Rust & Elisp tests
-      run: ./build.sh && ./run-tests.sh   
+        run: |
+          ./build.sh
+	  ./run-tests.sh   
        
 
       # ---- Upload JUnit reports (optional but useful) ----
