@@ -8,15 +8,21 @@ fail=0
 mkdir -p tests/reports
 export EMACS_TEST_JUNIT_REPORT=test-report.xml;
 
-
 # --- Emacs tests ---
 
 if [ "$CI" = "true" ] || [ "$RUN_SLOW_TESTS" = "true" ]; then
     emacs --batch -L lisp/ -L tests/ -l tests/elevenshtein-tests.el -f ert-run-tests-batch-and-exit
+    emacs_rc=$?
+
 else
     emacs --batch -L lisp/ -L tests/ -l tests/elevenshtein-tests.el  -eval "(ert-run-tests-batch-and-exit '(not (tag :slow)))"
+    emacs_rc=$?
+      
 fi
 
+if [ "$emacs_rc" -ne 0 ]; then
+  fail=1
+fi
 
 
 # --- Cargo tests (capture cargo status even though we pipe to xmllint) ---
@@ -27,6 +33,7 @@ cd ../
 if [ "$cargo_rc" -ne 0 ]; then
   fail=1
 fi
+
 
 
 # --- Merge XMLs (still run this no matter what) ---
