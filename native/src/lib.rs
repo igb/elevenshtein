@@ -152,6 +152,6 @@ fn test_edit_distance_1000() {
 
 #[test]
 fn test_edit_distance_10000() {
-    //   Ensure that edit distance is calculated correctly with max delta for a 100-byte string.
+    //   Ensure that edit distance is calculated correctly with max delta for a 10000-byte string.
     test_n_distance(10000);
 }

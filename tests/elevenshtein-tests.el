@@ -172,3 +172,10 @@
   (test-native-n-distance 10000) 
  )
 
+
+(ert-deftest test-native-edit-distance-100000()
+  :tags '(:slow)
+  "Ensure that edit distance is calculated correctly with max delta for a 1000-byte string."
+  (test-native-n-distance 100000) 
+ )
+
