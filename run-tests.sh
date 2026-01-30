@@ -8,6 +8,19 @@ fail=0
 mkdir -p tests/reports
 export EMACS_TEST_JUNIT_REPORT=test-report.xml;
 
+
+
+# --- Cargo tests (capture cargo status even though we pipe to xmllint) ---
+cd native; cargo +nightly test  --release -- -Z unstable-options --report-time --format junit | xmllint --format - > elevenshtein-tests-cargo-release.xml
+cargo_rc=${PIPESTATUS[0]}
+cd ../
+
+if [ "$cargo_rc" -ne 0 ]; then
+  fail=1
+fi
+
+
+
 # --- Emacs tests ---
 
 if [ "$CI" = "true" ] || [ "$RUN_SLOW_TESTS" = "true" ]; then
@@ -21,16 +34,6 @@ else
 fi
 
 if [ "$emacs_rc" -ne 0 ]; then
-  fail=1
-fi
-
-
-# --- Cargo tests (capture cargo status even though we pipe to xmllint) ---
-cd native; cargo +nightly test  --release -- -Z unstable-options --report-time --format junit | xmllint --format - > elevenshtein-tests-cargo-release.xml
-cargo_rc=${PIPESTATUS[0]}
-cd ../
-
-if [ "$cargo_rc" -ne 0 ]; then
   fail=1
 fi
 
