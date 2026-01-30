@@ -8,3 +8,4 @@ crate-type = ["cdylib"]
 
 [dependencies]
 emacs = "0.19"  # From https://github.com/ubolonton/emacs-module-rs
+ndarray = "0.16"

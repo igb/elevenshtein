@@ -1,7 +1,10 @@
 <xsl:stylesheet xmlns="http://hccp.org" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
   <xsl:output method="text"/>
 
+  <xsl:param name="testname"/>
+
   <xsl:template match="node() | @*">
+    <xsl:value-of select="$testname"/>
     <xsl:apply-templates select="testsuites"/>
   </xsl:template>
 
@@ -14,8 +17,9 @@
   </xsl:template>
 
   
-  <xsl:template match="testcase[@name='test_edit_distance_100']">
-      <xsl:value-of select="@time"/>
+  <xsl:template match="testcase">
+    <xsl:if test="@name = $testname">
+    <xsl:value-of select="@time"/>, </xsl:if>
   </xsl:template>
 
 
