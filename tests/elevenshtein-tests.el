@@ -160,6 +160,35 @@
 
 
 
+(ert-deftest test-single-char-no-diff()
+  "Ensure that single-char string comparisons are handled correctly."
+  (should
+   (equal
+    (edit-distance "a" "a")
+    0)
+   ))
+
+
+(ert-deftest test-single-char-with-diff()
+  "Ensure that single-char string comparisons are handled correctly."
+  (should
+   (equal
+    (edit-distance "a" "b")
+    1)
+   ))
+
+
+(ert-deftest test-single-char-to-larger-string()
+  "Ensure that single-char string comparisons are handled correctly."
+  (should
+   (equal
+    (edit-distance "a" "ab")
+    1)
+   ))
+
+
+
+
 (ert-deftest test-edit-distance-100()
   "Ensure that edit distance is calculated correctly with max delta for a 100-byte string."
   (test-n-distance 100) 
