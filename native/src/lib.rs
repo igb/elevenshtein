@@ -113,6 +113,24 @@ fn test_edit_distance_basic() {
 }
 
 #[test]
+fn test_edit_distance_empty_empty() {
+    // Testing the edge case of empty strings on both sides of the comparison
+    assert_eq!(0, edit_distance_impl("", ""));
+}
+
+#[test]
+fn test_edit_distance_empty_non_empty() {
+    // Testing the edge case of an empty string on the second side of the comparison
+    assert_eq!(3, edit_distance_impl("", "xyz"));
+}
+
+#[test]
+fn test_edit_distance_non_empty_empty() {
+    // Testing the edge case of an empty strings on the first side of the comparison
+    assert_eq!(3, edit_distance_impl("abc", ""));
+}
+
+#[test]
 fn test_edit_distance_different_lengths() {
     // Ensure that edit distance is calculated correctly when strings are of different lengths.
 
