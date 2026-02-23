@@ -133,6 +133,33 @@
    3)
    ))
 
+(ert-deftest test-empty-empty-edit-distance()
+  "Ensure that zero-length-to-zero-length string  comparisons are hadled correctly."
+  (should
+   (equal
+    (edit-distance "" "")
+    0)
+   ))
+
+(ert-deftest test-non-empty-empty-edit-distance()
+  "Ensure that zero-length-to-zero-length string  comparisons are nadled correctly."
+  (should
+   (equal
+    (edit-distance "xyz" "")
+    3)
+   ))
+
+
+(ert-deftest test-empty-non-empty-edit-distance()
+  "Ensure that zero-length-to-zero-length string  comparisons are nadled correctly."
+  (should
+   (equal
+    (edit-distance "" "abc")
+    3)
+   ))
+
+
+
 (ert-deftest test-edit-distance-100()
   "Ensure that edit distance is calculated correctly with max delta for a 100-byte string."
   (test-n-distance 100) 
