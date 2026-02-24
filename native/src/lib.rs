@@ -131,6 +131,24 @@ fn test_edit_distance_non_empty_empty() {
 }
 
 #[test]
+fn test_edit_distance_single_char_same() {
+    // Testing an edge case for single chars
+    assert_eq!(0, edit_distance_impl("a", "a"));
+}
+
+#[test]
+fn test_edit_distance_single_char_diff() {
+    // Testing an edge case for single chars
+    assert_eq!(1, edit_distance_impl("a", "b"));
+}
+
+#[test]
+fn test_edit_distance_single_char_vd_longer_string() {
+    // Testing an edge case for single chars
+    assert_eq!(1, edit_distance_impl("a", "ab"));
+}
+
+#[test]
 fn test_edit_distance_different_lengths() {
     // Ensure that edit distance is calculated correctly when strings are of different lengths.
 
