@@ -236,3 +236,14 @@
     (edit-distance "जरा" "ज़रा")
     1)
    ))
+
+
+
+(ert-deftest test-edit-distance-with-unicode-cjk-diff()
+      "Ensure that edit distance is calculated correctly in non-latin character sets"  
+  (should
+   (equal
+    (edit-distance "日本" "日本語")
+    1)
+   ))
+
