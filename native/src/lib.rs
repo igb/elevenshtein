@@ -203,3 +203,9 @@ fn test_edit_distance_with_unicode_cjk_diff() {
     //ensure that edit distance is calculated correctly in non-latin character sets
     assert_eq!(1, edit_distance_impl("日本", "日本語"));
 }
+
+#[test]
+fn test_edit_distance_with_unicode_emojii_diff() {
+    //ensure that edit distance is calculated correctly in non-latin character sets
+    assert_eq!(1, edit_distance_impl("🤔", "😬"));
+}

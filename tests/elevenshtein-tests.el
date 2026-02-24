@@ -247,3 +247,12 @@
     1)
    ))
 
+
+(ert-deftest test-edit-distance-with-unicode-emojii-diff()
+      "Ensure that edit distance is calculated correctly in non-latin character sets"  
+  (should
+   (equal
+    (edit-distance "🤔" "😬")
+    1)
+   ))
+
