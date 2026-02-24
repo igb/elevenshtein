@@ -215,3 +215,9 @@ fn test_edit_distance_with_unicode_accent_diff() {
     //ensure that edit distance is calculated correctly in non-latin character sets
     assert_eq!(1, edit_distance_impl("café", "cafe"));
 }
+
+#[test]
+fn test_edit_distance_with_unicode_diacritics_diff() {
+    //ensure that edit distance is calculated correctly in non-latin character sets
+    assert_eq!(1, edit_distance_impl("naïve", "naive"));
+}

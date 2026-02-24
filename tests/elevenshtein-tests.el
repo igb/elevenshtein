@@ -266,3 +266,12 @@
     1)
    ))
 
+
+(ert-deftest test-edit-distance-with-unicode-diacritics-diff()
+      "Ensure that edit distance is calculated correctly in non-latin character sets"  
+  (should
+   (equal
+    (edit-distance "naïve" "naive")
+    1)
+   ))
+
