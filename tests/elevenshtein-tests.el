@@ -229,3 +229,10 @@
  )
 
 
+(ert-deftest test-edit-distance-with-unicode-hindi-nutka-diff()
+      "Ensure that edit distance is calculated correctly in non-latin charcter sets"  
+  (should
+   (equal
+    (edit-distance "जरा" "ज़रा")
+    1)
+   ))
