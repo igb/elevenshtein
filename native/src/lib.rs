@@ -191,3 +191,9 @@ fn test_edit_distance_10000() {
     //   Ensure that edit distance is calculated correctly with max delta for a 10000-byte string.
     test_n_distance(10000);
 }
+
+#[test]
+fn test_edit_distance_with_unicode_hindi_nutka_diff() {
+    //ensure that edit distance is calculated correctly in non-latin charcter sets
+    assert_eq!(1, edit_distance_impl("जरा", "ज़रा"));
+}
