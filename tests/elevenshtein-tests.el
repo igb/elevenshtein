@@ -275,3 +275,12 @@
     1)
    ))
 
+(ert-deftest test-implementation-consistency ()
+  "Verify Elisp and Rust implementations return identical results."
+  (let ((test-cases '(("kitten" "sitting")
+                      ("" "abc")
+                      ("unicode" "ünïcödé")
+                      ("short" "much longer string here"))))
+    (dolist (case test-cases)
+      (should (equal (edit-distance (car case) (cadr case))
+                     (native-edit-distance (car case) (cadr case)))))))
